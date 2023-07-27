@@ -80,3 +80,17 @@ test("loading should not be rendered", () => {
   const btnEl = screen.getByRole('button');
   expect(btnEl).not.toHaveTextContent(/please wait/i)
 })
+
+test("loading should be rendered when we click", () => {
+  render(<Login />);
+  const btnEl = screen.getByRole('button');
+  const userInputElt = screen.getByPlaceholderText(/username/i)
+  const pswdInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = 'test'
+  fireEvent.change(userInputElt, { target: { value: testValue } })
+  fireEvent.change(pswdInputEl, { target: { value: testValue } })
+  fireEvent.click(btnEl)
+  expect(btnEl).toHaveTextContent(/please wait/i)
+
+})
