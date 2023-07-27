@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
+export const URL = 'https://jsonplaceholder.typicode.com/users/1'
 function Login() {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
     const [userName, setUserName] = useState('');
     const [pswd, setPswd] = useState('');
     const [user, setUser] = useState({});
-    const URL = 'https://jsonplaceholder.typicode.com/users/1'
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,10 +15,11 @@ function Login() {
             setLoading(true);
             const { data } = await axios.get(URL)
             setUser(data)
+            setLoading(false);
 
         } catch (error) {
             setError(true);
-
+            setLoading(false);
         }
 
 

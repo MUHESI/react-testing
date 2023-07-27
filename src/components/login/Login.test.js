@@ -1,6 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import Login from './Login';
 
+
+jest.mock('axios', () => ({
+  __esModule: true,
+  default: { get: () => ({ data: { id: 1, name: 'test', } }) }
+}))
 
 test('Username input should be rendered', () => {
   render(<Login />)
@@ -94,3 +99,21 @@ test("loading should be rendered when we click", () => {
   expect(btnEl).toHaveTextContent(/please wait/i)
 
 })
+
+test("loading should not be rendered afer fetching", async () => {
+  render(<Login />);
+  const btnEl = screen.getByRole('button');
+  const userInputElt = screen.getByPlaceholderText(/username/i)
+  const pswdInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = 'test'
+  fireEvent.change(userInputElt, { target: { value: testValue } })
+  fireEvent.change(pswdInputEl, { target: { value: testValue } })
+  fireEvent.click(btnEl)
+  await waitFor(() =>
+    expect(btnEl).not.toHaveTextContent(/please wait/i)
+  )
+
+})
+
+
