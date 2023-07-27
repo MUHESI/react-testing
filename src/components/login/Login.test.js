@@ -36,7 +36,7 @@ test("password input should be empty", () => {
 test('button should be disabled', () => {
   render(<Login />)
   const btnInputElt = screen.getByRole("button")
-  expect(btnInputElt).toBeInTheDocument()
+  expect(btnInputElt).toBeDisabled()
 })
 
 test('Error message should not be visible', () => {
@@ -61,3 +61,16 @@ test("password input should change", () => {
   fireEvent.change(pswdInputEl, { target: { value: testValue } })
   expect(pswdInputEl.value).toBe(testValue)
 })
+
+test('button should not be disabled when inputs exit', () => {
+  render(<Login />)
+  const btnInputElt = screen.getByRole("button")
+  const userInputElt = screen.getByPlaceholderText(/username/i)
+  const pswdInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = 'test'
+  fireEvent.change(userInputElt, { target: { value: testValue } })
+  fireEvent.change(pswdInputEl, { target: { value: testValue } })
+  expect(btnInputElt).not.toBeDisabled()
+})
+

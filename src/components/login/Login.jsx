@@ -14,7 +14,9 @@ function Login() {
                 <input type="password" placeholder="password" value={pswd}
                     onChange={(e) => setPswd(e.target.value)}
                 />
-                <button>login</button>
+                <button
+                    disabled={userName === '' || pswd === ''}
+                >login</button>
                 <span style={{ visibility: error ? 'visible' : 'hidden' }} data-testid='error'> Something went wrong</span>
 
             </form>
