@@ -54,6 +54,10 @@ test('Username input should change', () => {
   expect(userInputElt.value).toBe(testValue)
 })
 
-
-//  git commit - m'[testing-login] test for hadnle change value of username
-//  Username input should change'
+test("password input should change", () => {
+  render(<Login />);
+  const pswdInputEl = screen.getByPlaceholderText(/password/i);
+  const testValue = 'root'
+  fireEvent.change(pswdInputEl, { target: { value: testValue } })
+  expect(pswdInputEl.value).toBe(testValue)
+})
