@@ -4,7 +4,7 @@ import Login from './Login';
 
 jest.mock('axios', () => ({
   __esModule: true,
-  default: { get: () => ({ data: { id: 1, name: 'test', } }) }
+  default: { get: () => ({ data: { id: 1, name: 'MUHESI', } }) }
 }))
 
 test('Username input should be rendered', () => {
@@ -113,7 +113,19 @@ test("loading should not be rendered afer fetching", async () => {
   await waitFor(() =>
     expect(btnEl).not.toHaveTextContent(/please wait/i)
   )
-
 })
 
+test("User should  be rendered afer fetching", async () => {
+  render(<Login />);
+  const btnEl = screen.getByRole('button');
+  const userInputElt = screen.getByPlaceholderText(/username/i)
+  const pswdInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = 'test'
+  fireEvent.change(userInputElt, { target: { value: testValue } })
+  fireEvent.change(pswdInputEl, { target: { value: testValue } })
+  fireEvent.click(btnEl)
+  const userItem = await screen.findByText('MUHESI')
+  expect(userItem).toBeInTheDocument()
+})
 
