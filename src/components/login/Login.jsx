@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 function Login() {
     const [error, setError] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [pswd, setPswd] = useState('');
 
     return (
         <div className='container'>

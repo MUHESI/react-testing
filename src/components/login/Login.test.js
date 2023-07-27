@@ -44,3 +44,7 @@ test('Error message should not be visible', () => {
   const errorElt = screen.getByTestId("error")
   expect(errorElt).not.toBeVisible()
 })
+
+ git commit - m'[testing-login] test for error message
+
+ Error message should not be visible'
