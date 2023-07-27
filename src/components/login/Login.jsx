@@ -9,10 +9,11 @@ function Login() {
     const [user, setUser] = useState({});
     const URL = 'https://jsonplaceholder.typicode.com/users/1'
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = axios.get(URL)
+            setLoading(true);
+            const { data } = await axios.get(URL)
             setUser(data)
 
         } catch (error) {
@@ -36,7 +37,7 @@ function Login() {
                 <button
                     disabled={userName === '' || pswd === ''}
                     onClick={(e) => handleSubmit(e)}
-                >{loading ? 'loading' : 'login'}</button>
+                >{loading ? 'please wait' : 'login'}</button>
                 <span style={{ visibility: error ? 'visible' : 'hidden' }} data-testid='error'> Something went wrong</span>
 
             </form>

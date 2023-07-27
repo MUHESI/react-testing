@@ -74,3 +74,9 @@ test('button should not be disabled when inputs exit', () => {
   expect(btnInputElt).not.toBeDisabled()
 })
 
+
+test("loading should not be rendered", () => {
+  render(<Login />);
+  const btnEl = screen.getByRole('button');
+  expect(btnEl).not.toHaveTextContent(/please wait/i)
+})
