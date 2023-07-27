@@ -44,7 +44,6 @@ test('Error message should not be visible', () => {
   const errorElt = screen.getByTestId("error")
   expect(errorElt).not.toBeVisible()
 })
-
 // |||
 
 test('Username input should change', () => {

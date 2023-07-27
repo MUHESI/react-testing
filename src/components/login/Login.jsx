@@ -8,7 +8,10 @@ function Login() {
     return (
         <div className='container'>
             <form>
-                <input type="text" placeholder="username" value={userName} />
+                <input type="text" placeholder="username" value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+
+                />
                 <input type="password" placeholder="password" value={pswd} />
                 <button>login</button>
                 <span style={{ visibility: error ? 'visible' : 'hidden' }} data-testid='error'> Something went wrong</span>
