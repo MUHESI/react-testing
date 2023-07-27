@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Login from './Login';
 
 
@@ -45,6 +45,16 @@ test('Error message should not be visible', () => {
   expect(errorElt).not.toBeVisible()
 })
 
- git commit - m'[testing-login] test for error message
+// |||
 
- Error message should not be visible'
+test('Username input should change', () => {
+  render(<Login />)
+  const userInputElt = screen.getByPlaceholderText(/username/i)
+  const testValue = 'test'
+  fireEvent.change(userInputElt, { target: { value: testValue } })
+  expect(userInputElt.value).toBe(testValue)
+})
+
+
+//  git commit - m'[testing-login] test for hadnle change value of username
+//  Username input should change'
